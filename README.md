@@ -34,8 +34,8 @@ Example
     ---------------------------------------------------------------------------
          Wooden Planks            Wooden Planks            Wooden Planks
          
-  TODO
-  ====
+TODO
+====
   
   * fix some issues with some items returning wrong items
   * console spacing not perfect
