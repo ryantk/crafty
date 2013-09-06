@@ -1,33 +1,25 @@
-class Array
-  def after
-    yield if self.any?
-  end
-end
-
-class Enumerator
-  def after
-    yield if self.any?
-  end
-
-  def if_empty
-    yield unless self.any?
-  end
-end
-
 class CommandLine
-  def prompt prompt = "", options = []
-    puts prompt
+  def display string
+    puts string
+  end
 
-    options.each_with_index { |option, i| puts "#{i}) #{option}" }.after do
-      print "\n> "
-      gets.chomp
-    end
+  def print_options options
+    options.each_with_index { |option, i| puts "#{i}) #{option}" }
+  end
+
+  def get_response
+    print "> "
+    gets.chomp
+  end
+
+  def prompt prompt = "", options = []
+    display prompt
+    print_options options
+    get_response
   end
 end
 
 class CraftyInterface
-  OPTIONS = { '0' => :quit }
-
   def initialize
     @crafty = Crafty.new
     @table = CraftingTable.new
@@ -35,28 +27,27 @@ class CraftyInterface
   end
 
   def start
-    display_welcome_message
-    choose_options
+    @command_line.display "Welcome to Crafty!"
+    display_crafting_table recipie_for(item(to_craft))
   end
 
   private
 
-  def display_welcome_message
-    @command_line.prompt "Welcome to Crafty!"
+  def to_craft
+    @command_line.prompt "Enter the name of the item you wish to craft"
   end
 
-  def choose_options option=''
-    until option == :quit
-      prompt = "Enter the name of the item you wish to craft"
-      chosen = @command_line.prompt prompt, ['Quit']
-      option = OPTIONS[chosen]
+  def item term
+    items = @crafty.search term
+    index = @command_line.prompt('Which item?', items).to_i
+    items[index]
+  end
 
-      unless option == :quit
-        found = @crafty.search chosen
-        index = @command_line.prompt 'Which item?', found
+  def recipie_for craftable
+    @table.generate @crafty.materials(craftable)
+  end
 
-        @command_line.prompt @table.generate(@crafty.materials(found[index.to_i]))
-      end
-    end
+  def display_crafting_table recipie
+    @command_line.display recipie
   end
 end
