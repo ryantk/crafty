@@ -1,7 +1,7 @@
 crafty
 ======
 
-CLI tool to display Minecraft item crafting formulas
+CLI tool to display Minecraft item crafting recipies
 
 Usage
 =====
