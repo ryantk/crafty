@@ -1,24 +1,3 @@
-class CommandLine
-  def display string
-    puts string
-  end
-
-  def print_options options
-    options.each_with_index { |option, i| puts "#{i}) #{option}" }
-  end
-
-  def get_response
-    print "> "
-    gets.chomp
-  end
-
-  def prompt prompt = "", options = []
-    display prompt
-    print_options options
-    get_response
-  end
-end
-
 class CraftyInterface
   def initialize
     @crafty = Crafty.new
