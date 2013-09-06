@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-class Crafty
+class RecipieFinder
   def search item
     results = []
 
@@ -12,24 +12,25 @@ class Crafty
     end
   end
 
-  def is_craftable? item
-    search(item).any?
-  end
+  def ingredients item
+    recipie = Recipie.new
 
-  def materials item
-    crafting_table = ['','','','','','','','','']
-
-    grid = page.xpath("//div[div[@title=\"#{item}\"]]").css('div.mc_craft_box')
-    grid.each do |grid_space|
-      grid_index = grid_space.attr('id').match(/mc_craft_box_([1-9])/)[1].to_i
-
-      crafting_table[grid_index-1] = grid_space.attr('title')
+    grid(item).each do |space|
+      recipie.add_to_table index_of(space), space.attr('title')
     end
 
-    [ crafting_table[0..2], crafting_table[3..5], crafting_table[6..8] ]
+    recipie.as_rows
   end
 
   private
+
+  def grid item
+    page.xpath("//div[div[@title=\"#{item}\"]]").css('div.mc_craft_box')
+  end
+
+  def index_of space
+    space.attr('id').match(/mc_craft_box_([1-9])/)[1].to_i
+  end
 
   def page
     @page ||= Nokogiri::HTML open('http://minecraft.ign.com/crafting-recipes')
