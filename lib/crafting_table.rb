@@ -4,33 +4,19 @@ class CraftingTable
   end
 
   def generate materials
-    table = ""
-
-    table.tap do
-      materials.each_with_index do |row, index|
-        table << format(row) << "\n"
-
-        unless index == materials.size-1
-          table << divider << "\n"
-        end
-      end
-    end
+    materials.map{ |row| format(row) << "\n" }.join(divider << "\n")
   end
 
   private
 
   def format materials
     formatted = ""
-    formatted.tap do
-      materials.each do |material|
-        formatted << center(material)
-      end
-    end
+    materials.each { |material| formatted << center(material) }
+    formatted
   end
 
   def center material
-    space = ((@console_width / 3) - material.length) / 2
-    (" " * space) << material << (" " * space)
+    material.center(@console_width / 3)
   end
 
   def divider
