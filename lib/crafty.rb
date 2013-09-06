@@ -1,3 +1,6 @@
+require 'nokogiri'
+require 'open-uri'
+
 class Crafty
   def search item
     results = []
@@ -14,10 +17,29 @@ class Crafty
   end
 
   def materials item
-    []
+    crafting_table = ['','','','','','','','','']
+
+    grid = page.xpath("//div[div[@title=\"#{item}\"]]").css('div.mc_craft_box')
+    grid.each do |grid_space|
+      grid_index = grid_space.attr('id').match(/mc_craft_box_([1-9])/)[1].to_i
+
+      crafting_table[grid_index-1] = grid_space.attr('title')
+    end
+
+    [ crafting_table[0..2], crafting_table[3..5], crafting_table[6..8] ]
+  end
+
+  private
+
+  def page
+    @page ||= Nokogiri::HTML open('http://minecraft.ign.com/crafting-recipes')
   end
 
   CRAFTABLES = [
+    "Boots (Diamond)",
+    "Boots (Gold)",
+    "Boots (Iron)",
+    "Boots (Leather)",
     "Chestplate (Diamond)",
     "Chestplate (Gold)",
     "Chestplate (Iron)",
@@ -184,10 +206,6 @@ class Crafty
     "Wool (Pink)",
     "Wool (Purple)",
     "Wool (Red)",
-    "Wool (Yellow)",
-    "Boots (Diamond)",
-    "Boots (Gold)",
-    "Boots (Iron)",
-    "Boots (Leather)",
+    "Wool (Yellow)"
   ]
 end

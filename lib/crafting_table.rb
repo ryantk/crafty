@@ -14,6 +14,7 @@ class CraftingTable
           table << divider
         end
       end
+      print "\n\n"
     end
   end
 
@@ -21,7 +22,6 @@ class CraftingTable
 
   def spacing m
     length = m.collect { |material| material.length }.inject(:+)
-
     ((@console_width - length) / 3).floor.to_i
   end
 
