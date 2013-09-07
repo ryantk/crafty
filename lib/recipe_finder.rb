@@ -12,11 +12,6 @@ class RecipeFinder
   private
 
   def recipes
-    @recipes ||= JSON.parse recipes_file
-  end
-
-  def recipes_file
-    Dir.chdir File.dirname(__FILE__)
-    IO.read "recipes.json"
+    @recipes ||= JSON.parse IO.read("recipes.json")
   end
 end
