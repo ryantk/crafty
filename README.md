@@ -37,7 +37,5 @@ Example
 TODO
 ====
   
-  * fix some issues with some items returning wrong items
-  * console spacing not perfect
-    
-    
+  * vertical dividing lines for crafting table display
+  * more awesome
