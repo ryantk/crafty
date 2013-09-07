@@ -1,13 +1,13 @@
 class CraftyInterface
   def initialize
-    @recipies = RecipieFinder.new
+    @recipes = RecipeFinder.new
     @table = CraftingTable.new
     @command_line = CommandLine.new
   end
 
   def start
     @command_line.display "Welcome to Crafty!"
-    display_crafting_table recipie_for(item(to_craft))
+    display_crafting_table recipe_for(item(to_craft))
   end
 
   private
@@ -17,16 +17,16 @@ class CraftyInterface
   end
 
   def item term
-    items = @recipies.search term
+    items = @recipes.search term
     index = @command_line.prompt("\nWhich item?", items).to_i
     items[index]
   end
 
-  def recipie_for craftable
-    @table.generate @recipies.ingredients(craftable)
+  def recipe_for craftable
+    @table.generate @recipes.ingredients(craftable)
   end
 
-  def display_crafting_table recipie
-    @command_line.display recipie
+  def display_crafting_table recipe
+    @command_line.display recipe
   end
 end
