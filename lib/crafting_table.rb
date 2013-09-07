@@ -11,7 +11,7 @@ class CraftingTable
 
   def format materials
     formatted = ""
-    materials.each { |material| formatted << center(material) }
+    materials.each { |material| formatted << center(material || "") }
     formatted
   end
 
