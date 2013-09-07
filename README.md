@@ -39,3 +39,9 @@ TODO
   
   * vertical dividing lines for crafting table display
   * more awesome
+
+Other
+=====
+
+Credit to [Mathias Heck (4poc)](https://github.com/4poc) for recipes.json, 
+check out his repo [rbot-plugins](https://github.com/4poc/rbot-plugins)!
