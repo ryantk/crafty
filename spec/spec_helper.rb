@@ -1,3 +1,6 @@
 require 'rspec'
-require 'crafty'
+
 require 'crafting_table'
+require 'crafty_interface'
+require 'recipe_finder'
+require 'recipe'

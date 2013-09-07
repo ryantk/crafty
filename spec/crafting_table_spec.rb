@@ -6,14 +6,15 @@ describe CraftingTable do
   it { should respond_to :generate }
 
   describe '#generate' do
-    context 'when given array of crafting materials' do
-      it 'should display them in a grid' do
-        bed = [['',            '',            ''],
-               ['Wool',        'Wool',        'Wool'],
-               ['Wood Planks', 'Wood Planks', 'Wood Planks']]
+    context 'when given a recipe' do
+      it 'should return a table containing the recipes formatted' do
+        chest = [['Wooden Planks', 'Wooden Planks', 'Wooden Planks'],
+                 ['Wooden Planks', '',              'Wooden Planks'],
+                 ['Wooden Planks', 'Wooden Planks', 'Wooden Planks']]
 
-        expect(ct.generate(bed)).to match(/Wool/)
-        expect(ct.generate(bed)).to match(/Wood Planks/)
+        result = ct.generate chest
+        expect(result).to match(/Wooden Planks/)
+        expect(result).to match(/-------------/)
       end
     end
   end
