@@ -16,7 +16,7 @@ class RecipeFinder
   end
 
   def recipes_file
-    Dir.chdir(File.dirname(__FILE__))
-    IO.read("recipes.json")
+    Dir.chdir File.dirname(__FILE__)
+    IO.read "recipes.json"
   end
 end
