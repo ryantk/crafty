@@ -3,8 +3,6 @@ class CraftingTable
     @console_width = 60
   end
 
-  #materials = [[],[],[]]
-
   def generate materials
     materials.map { |row| format(row) << "\n" }.join(divider << "\n")
   end
