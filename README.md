@@ -28,17 +28,12 @@ Example
     
     > 4
     
-         Wooden Planks            Wooden Planks            Wooden Planks
+         Wooden Planks     |      Wooden Planks      |     Wooden Planks
     ---------------------------------------------------------------------------
-         Wooden Planks                                     Wooden Planks
+         Wooden Planks     |                         |     Wooden Planks
     ---------------------------------------------------------------------------
-         Wooden Planks            Wooden Planks            Wooden Planks
+         Wooden Planks     |      Wooden Planks      |     Wooden Planks
          
-TODO
-====
-  
-  * vertical dividing lines for crafting table display
-  * more awesome
 
 Other
 =====
