@@ -4,20 +4,20 @@ class CraftingTable
   end
 
   def generate materials
-    materials.map { |row| format(row) << "\n" }.join(divider << "\n")
+    materials.map { |row| format(row) }.join(divider)
   end
 
   private
 
-  def format materials
-    materials.collect { |material| center(material || "") }.join
+  def format row
+    row.map { |material| (material || "").center(width) }.join('|')
   end
 
-  def center material
-    material.center(@console_width / 3)
+  def width
+    (@console_width-3) / 3
   end
 
   def divider
-    '-' * @console_width
+    ["\n", '-' * @console_width, "\n"].join
   end
 end
